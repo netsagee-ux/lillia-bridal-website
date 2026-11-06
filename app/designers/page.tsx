@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
 import { designers } from "@/lib/lillia-data";
+import { SaveDesigner } from "@/components/site/SaveDesigner";
 
 export const metadata: Metadata = {
   title: "Designer Gowns",
@@ -47,6 +48,7 @@ export default function DesignersPage() {
               <h2>{designer.name}</h2>
               <p>{designer.description}</p>
               <span className="designer-feature__line">Available to discover by private appointment</span>
+              <SaveDesigner name={designer.name} />
             </div>
           </article>
         ))}
