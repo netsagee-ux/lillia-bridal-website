@@ -58,3 +58,39 @@ h3 {font-size:clamp(1.65rem,2.6vw,3rem)}
   .eyebrow,.section-number {letter-spacing:.12em}
   .button,.header-book,.form-submit {max-width:100%;white-space:normal;text-align:center}
 }
+
+/* Lillia atelier identity — warm pearl, espresso and muted brass. No decorative rules. */
+:root {
+ --ink:#282420;--ink-soft:#423b34;--ivory:#f7f5f0;--ivory-light:#fffefa;
+ --sand:#ebe6dc;--stone:#8b8175;--wine:#51463c;--gold:#a68c6a;
+ --line:transparent;--line-light:transparent;
+ --display:"Cormorant Garamond",Georgia,serif;
+ --editorial:"Cormorant Garamond",Georgia,serif;
+ --sans:"Manrope",Arial,sans-serif;
+ --background:var(--ivory);--card:var(--ivory-light);--primary:var(--ink);--accent:var(--gold);
+ --border:transparent;--input:rgba(40,36,32,.16);
+}
+html,body{background:#f7f5f0;color:#282420}
+h1,h2,h3,.home-hero h1,.page-hero h1,.appointment-masthead h1{
+ font-family:var(--display);font-weight:400;letter-spacing:-.025em;line-height:1.05;
+}
+h1 em,h2 em,h3 em{font-family:var(--editorial);font-weight:400;letter-spacing:-.025em}
+h1,.home-hero h1{font-size:clamp(3.1rem,7vw,7.4rem)}
+h2{font-size:clamp(2.6rem,5.2vw,5.3rem)}
+h3{font-size:clamp(2rem,3.2vw,3.5rem)}
+.home-hero{background:linear-gradient(125deg,#f8f6f1 0%,#eee8dd 100%)}
+.home-hero__media img{border-radius:12px}
+.appointment-form{background:#fffefa;box-shadow:0 20px 65px rgba(45,36,25,.045)}
+.button,.header-book,.form-submit{box-shadow:none}
+.button:hover,.header-book:hover,.form-submit:hover{box-shadow:0 12px 25px rgba(45,36,25,.09)}
+.site-header,.site-header--scrolled{border:0!important}
+.house-rail,.editorial-pair__features,.designer-feature__line,.appointment-assurances,.mobile-menu__details{border:0!important}
+hr,.section-shell::before,.section-shell::after{border-color:transparent}
+:is(.site-header,.site-nav,.designer-preview,.designer-feature,.appointment-form,.form-field,.collection-note,.home-intro,.mobile-menu) :is(hr){display:none}
+:is(.designer-preview,.designer-feature,.appointment-form,.form-field,.collection-note,.home-intro,.site-header,.mobile-menu) {border-color:transparent}
+.lillia-marquee{background:#282420;color:#f7f5f0}
+@media(max-width:700px){
+ h1,.home-hero h1{font-size:clamp(2.8rem,12vw,4.3rem);line-height:1.08}
+ h2{font-size:clamp(2.3rem,9vw,3.4rem)}
+ h3{font-size:clamp(1.85rem,7vw,2.7rem)}
+}
