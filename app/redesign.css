@@ -1,0 +1,31 @@
+/* Lillia 2026: new modern couture art direction */
+:root {
+  --ink:#27232b; --ink-soft:#36303a; --ivory:#f4f0f2; --ivory-light:#fffafd;
+  --sand:#e7dbe4; --stone:#8c798b; --wine:#81536e; --gold:#ad7e98;
+  --line:rgba(72,43,66,.11); --display:"DM Sans",sans-serif;
+  --editorial:"Playfair Display",Georgia,serif; --sans:"DM Sans",sans-serif;
+  --header-height:84px; --radius:20px;
+}
+body {background:#f4f0f2;line-height:1.65;font-size:16px}
+h1,h2,h3 {font-family:var(--display);font-weight:600;letter-spacing:-.055em;line-height:1.08}
+h1 em,h2 em,h3 em {font-family:var(--editorial);font-weight:500;letter-spacing:-.035em}
+.section-shell {width:min(calc(100% - 64px),1320px)}
+.site-header {backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
+.home-hero {background:linear-gradient(135deg,#f5edf2 0%,#f1e8ee 55%,#e8dce7 100%)}
+.home-hero__copy {padding-block:clamp(5rem,9vw,10rem)}
+.home-hero h1 {font-size:clamp(3.5rem,7.5vw,8.5rem);line-height:1.02}
+.home-hero__media img {border-radius:26px 26px 6px 6px}
+.button,.header-book,.form-submit {border-radius:100px!important;transition:transform .35s ease,box-shadow .35s ease,background .35s ease}
+.button:hover,.header-book:hover,.form-submit:hover {transform:translateY(-3px);box-shadow:0 14px 30px rgba(63,34,53,.16)}
+.home-intro,.collection-note,.real-stories {padding-block:clamp(5rem,10vw,10rem)}
+.designer-preview__image img,.designer-feature__media img,.real-stories img {border-radius:18px}
+.designer-preview__image,.designer-feature__media {overflow:hidden;border-radius:18px}
+.designer-preview__image img,.designer-feature__media img {transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.designer-preview:hover img,.designer-feature:hover img {transform:scale(1.045)}
+.appointment-form {border-radius:24px;background:#fffafd;padding:clamp(1.5rem,4vw,3rem);box-shadow:0 24px 70px rgba(63,34,53,.06)}
+.appointment-form input,.appointment-form select,.appointment-form textarea {border-radius:12px}
+.lillia-marquee {overflow:hidden;white-space:nowrap;background:#332633;color:#f9eff6;padding:16px 0;font:500 12px var(--sans);letter-spacing:.24em;text-transform:uppercase}
+.lillia-marquee span {display:inline-block;min-width:max-content;animation:lillia-drift 38s linear infinite}
+@keyframes lillia-drift {to{transform:translateX(-50%)}}
+@media(max-width:700px){.section-shell{width:calc(100% - 36px)}.home-hero__copy{padding-block:5rem}.home-hero h1{font-size:clamp(3rem,13vw,5rem)}}
+@media(prefers-reduced-motion:reduce){.lillia-marquee span{animation:none!important}*,*::before,*::after{scroll-behavior:auto!important}}
