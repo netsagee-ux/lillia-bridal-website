@@ -5,9 +5,23 @@ import { ArrowRight, Check } from "lucide-react";
 
 export function AppointmentForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [draftLink, setDraftLink] = useState("");
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const fields = [
+      ["Name", data.get("name")],
+      ["Email", data.get("email")],
+      ["Phone", data.get("phone")],
+      ["Wedding date", data.get("weddingDate")],
+      ["Gown budget", data.get("budget")],
+      ["Preferred visit", data.get("preferredDate")],
+      ["Notes", data.get("message")],
+    ];
+    const body = fields.map(([label, value]) => `${label}: ${String(value || "Not provided")}`).join("\\n");
+    const link = `mailto:Limara@LilliaBridal.com?subject=${encodeURIComponent("Private bridal appointment request")}&body=${encodeURIComponent(body)}`;
+    setDraftLink(link);
     setSubmitted(true);
   };
 
@@ -15,12 +29,12 @@ export function AppointmentForm() {
     return (
       <div className="form-success" role="status" aria-live="polite">
         <span><Check size={22} strokeWidth={1.4} /></span>
-        <p className="eyebrow">Request prepared</p>
+        <p className="eyebrow">Email draft prepared</p>
         <h2>Thank you.<br /><em>Now let’s find your dress.</em></h2>
-        <p>This preview has captured your details. To confirm an appointment today, speak directly with Limara by phone or email.</p>
+        <p>Your email app can open a pre-filled request. Please press Send in your email app; this website has not submitted or stored your details.</p>
         <div className="form-success__links">
           <a href="tel:+447581385143">Call 07581 385143</a>
-          <a href="mailto:Limara@LilliaBridal.com">Email Limara</a>
+          <a href={draftLink}>Open your appointment email</a>
         </div>
         <button type="button" onClick={() => setSubmitted(false)}>Send another request</button>
       </div>
@@ -75,7 +89,7 @@ export function AppointmentForm() {
       <button className="form-submit" type="submit">
         Send appointment request <ArrowRight size={18} strokeWidth={1.4} />
       </button>
-      <p className="form-note">Appointments are confirmed personally by Limara. This form is a website preview and does not send data externally.</p>
+      <p className="form-note">Appointments are confirmed personally by Limara. This form prepares an email in your own email app. Your request is not sent until you press Send there.</p>
     </form>
   );
 }
