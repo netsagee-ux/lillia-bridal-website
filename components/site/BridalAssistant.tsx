@@ -18,7 +18,7 @@ export function BridalAssistant() {
     const q=value.trim().slice(0,400);
     if(!q)return;
     const response=answers.find(item=>item.test.test(q))?.reply || "I can help with designer gowns, prices, appointments and our location. For anything else, Limara can help personally by email or phone.";
-    setMessages(prev=>[...prev,{from:"visitor",text:q},{from:"assistant",text:response}].slice(-18));
+    setMessages(prev => [...prev, { from: "visitor" as const, text: q }, { from: "assistant" as const, text: response }].slice(-18));
     setInput("");
   }
   return <div style={{position:"fixed",bottom:22,right:22,zIndex:1000,fontFamily:"var(--sans)"}}>
