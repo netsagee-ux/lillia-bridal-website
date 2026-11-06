@@ -24,6 +24,8 @@ const welcome: Message = { from:"assistant", text:"Welcome to Lillia Bridal. I'm
 export function BridalAssistant() {
   const [open,setOpen]=useState(false);
   const [input,setInput]=useState("");
+  const [journeyStep,setJourneyStep]=useState(0);
+  const [preferences,setPreferences]=useState<string[]>([]);
   const [messages,setMessages]=useState<Message[]>([welcome]);
   const endRef=useRef<HTMLDivElement>(null);
   const inputRef=useRef<HTMLInputElement>(null);
@@ -43,6 +45,17 @@ export function BridalAssistant() {
     setMessages(previous=>[...previous,{from:"visitor" as const,text:question},{from:"assistant" as const,text:answer}].slice(-24));
     setInput("");
   }
+  const questions = [
+    { title:"What feels most like you?", options:["Modern & minimal","Romantic & detailed","Timeless & classic","Still exploring"] },
+    { title:"What gown budget feels comfortable?", options:["£500–£1,000","£1,000–£1,500","£1,500–£2,000","£2,000+","Not sure yet"] },
+    { title:"When is your wedding?", options:["Within 6 months","6–12 months","Over a year away","Date not set"] },
+  ];
+  function choosePreference(choice:string) {
+    const next=[...preferences,choice];
+    setPreferences(next);
+    setJourneyStep(step=>step+1);
+  }
+  const journeyEmail = `mailto:Limara@LilliaBridal.com?subject=${encodeURIComponent("My bridal styling consultation")}&body=${encodeURIComponent("Hello Limara, I'd love to arrange a private appointment.\\n\\nStyle: "+(preferences[0]||"Not selected")+"\\nBudget: "+(preferences[1]||"Not selected")+"\\nWedding timing: "+(preferences[2]||"Not selected")+"\\n\\nPlease let me know the next steps.")}`;
   return <div className="concierge-root">
     {open && <section className="concierge-panel" role="dialog" aria-label="Lillia virtual concierge">
       <header className="concierge-head">
@@ -50,6 +63,14 @@ export function BridalAssistant() {
         <div className="concierge-head-copy"><span className="concierge-kicker">A LITTLE HELP, BEAUTIFULLY GIVEN</span><strong>Lillia Concierge</strong><span className="concierge-status"><i/> Virtual boutique guide</span></div>
         <button type="button" className="concierge-close" onClick={()=>setOpen(false)} aria-label="Close concierge"><X size={20}/></button>
       </header>
+      <div className="concierge-journey">
+        <div className="concierge-journey-heading"><span>YOUR PRIVATE BRIDAL EDIT</span><button type="button" onClick={()=>{setJourneyStep(0);setPreferences([])}}>Start again</button></div>
+        {journeyStep<questions.length ? <div className="concierge-journey-content">
+          <p>{questions[journeyStep].title}</p>
+          <div className="concierge-journey-options">{questions[journeyStep].options.map(choice=><button type="button" key={choice} onClick={()=>choosePreference(choice)}>{choice}<ArrowUpRight size={13}/></button>)}</div>
+          <small>Step {journeyStep+1} of {questions.length} · Your choices stay in this session</small>
+        </div> : <div className="concierge-journey-content"><p>Your bridal edit is ready.</p><span className="concierge-journey-summary">{preferences.join(" · ")}</span><a className="concierge-journey-email" href={journeyEmail}>Email my preferences to Limara <ArrowUpRight size={15}/></a><small>Your email app opens a draft; nothing is sent automatically.</small></div>}
+      </div>
       <div className="concierge-conversation" aria-live="polite" aria-relevant="additions">
         <div className="concierge-intro"><Sparkles size={15}/> YOUR BRIDAL JOURNEY STARTS HERE</div>
         {messages.map((message,index)=><div className={`concierge-bubble concierge-bubble--${message.from}`} key={index}>{message.text}</div>)}
